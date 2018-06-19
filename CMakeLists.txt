@@ -85,7 +85,8 @@ src/Viewer.cc
 src/Detector.cpp
 src/Label.cpp
 src/BaseDetector.cpp
-src/Segmentor.cpp)
+src/Segmentor.cpp
+src/DataStatistics.cpp)
 
 target_link_libraries(${PROJECT_NAME}
 ${OpenCV_LIBS}

@@ -31,6 +31,7 @@
 #include <Detector.h>
 #include <Segmentor.h>
 #include <BaseDetector.h>
+#include <DataStatistics.h>
 
 using namespace std;
 
@@ -207,6 +208,8 @@ int main(int argc, char **argv)
 
     // Save camera trajectory
     SLAM.SaveKeyFrameTrajectoryTUM("KeyFrameTrajectory.txt");
+    DataStatistics::SaveKeyPointNumbers("KeyPointNumbers.txt");
+
 
     return 0;
 }

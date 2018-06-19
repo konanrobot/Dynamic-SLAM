@@ -62,6 +62,7 @@
 
 #include "ORBextractor.h"
 #include "Detector.h"
+#include "DataStatistics.h"
 
 //#define MODIFIED
 
@@ -75,7 +76,6 @@ namespace ORB_SLAM2
 const int PATCH_SIZE = 31;
 const int HALF_PATCH_SIZE = 15;
 const int EDGE_THRESHOLD = 19;
-
 
 static float IC_Angle(const Mat& image, Point2f pt,  const vector<int> & u_max)
 {
@@ -1073,6 +1073,8 @@ void ORBextractor::operator()( InputArray _image, InputArray _mask, vector<KeyPo
     for (int level = 0; level < nlevels; ++level)
         allkeypointsnum += (int)allKeypoints[level].size();
 
+    cout << "allkeypointsnum = " << allkeypointsnum << endl;
+
     int originKeyPointNum = 0;
     int filterdKeyPointNum = 0;
 
@@ -1103,6 +1105,11 @@ void ORBextractor::operator()( InputArray _image, InputArray _mask, vector<KeyPo
     }
 
     allKeypoints.assign(filteredAllKeypoints.cbegin(), filteredAllKeypoints.cend());
+
+    // Record the key point number
+    assert(allkeypointsnum == originKeyPointNum);
+    DataStatistics::allKeyPointNums.push_back(allkeypointsnum);
+    DataStatistics::filteredKeyPointNums.push_back(filterdKeyPointNum);
 
     /********************************/
     /************* End **************/
