@@ -77,6 +77,9 @@ int main(int argc, char **argv)
     globalDetector = new Detector(model_file, weights_file, mean_file, mean_value);
 //    globalDetector = new Segmentor(model_file, weights_file, LUT_file);
     thread detectThread(&BaseDetector::Run, globalDetector);
+
+    // Stop detector if you need pure ORB-SLAM2.
+    globalDetector->Stop();
     /********************************/
     /************* End **************/
     /********************************/
